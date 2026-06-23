@@ -1,8 +1,32 @@
-# React + Vite
+# Frontend Despacho - Innovatech Chile
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web (React + Vite) para la gestión de ventas y despachos, consumiendo los microservicios backend desplegados en AWS EKS.
 
-Currently, two official plugins are available:
+## Arquitectura
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Framework**: React 18 + Vite
+- **Estilos**: Tailwind CSS
+- **Routing**: React Router DOM
+- **HTTP Client**: Axios
+- **Servidor de producción**: Nginx (imagen Docker multi-stage)
+- **Orquestación**: Kubernetes (AWS EKS)
+- **CI/CD**: GitHub Actions (build con variables de entorno → push ECR → deploy EKS)
+
+## Estructura de páginas
+
+| Ruta | Página | Descripción |
+|------|--------|-------------|
+| `/` | Inicio | Dashboard general con tarjetas informativas |
+| `/ventas` | Ventas | CRUD completo de órdenes de compra (crear, editar, eliminar, listar) |
+| `/usuarios` | Usuarios | Vista de roles y permisos del sistema |
+
+## Variables de entorno
+
+Este proyecto usa Vite, por lo que las variables se inyectan en **tiempo de build** (no en runtime):
+
+| Variable | Descripción |
+|----------|-------------|
+| `VITE_API_VENTAS_URL` | URL pública del servicio backend-ventas |
+| `VITE_API_DESPACHOS_URL` | URL pública del servicio backend-despachos |
+
+Para desarrollo local, crea un archivo `.env` en la raíz:
